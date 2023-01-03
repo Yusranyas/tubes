@@ -1,1 +1,66 @@
 
+class admin:
+    def __init__(self, name, password):
+        self.name = name
+        self.password = password
+
+class Managers:
+    def __init__(self):
+        self.managers = []
+
+    def add_manager(self, manager):
+        self.managers.append(manager)
+
+    def remove_manager(self, manager):
+        self.managers.remove(manager)
+
+    def edit_manager(self, manager, new_name, new_password):
+        manager.name = new_name
+        manager.password = new_password
+
+username = 'admin'
+password = '123'
+
+print("******selamat datang di menu admin******")
+input_username = input('Enter your username: ')
+input_password = input('Enter your password: ')
+
+if input_username == username and input_password == password:
+    managers = Managers()
+
+    managers.add_manager(admin('', ''))
+
+    while True:
+        print('Pilih salah satu opsi berikut:')
+        print('1. Tambah manajer')
+        print('2. Hapus manajer')
+        print('3. Edit manajer')
+        print('4. Lihat daftar manajer')
+        print('5. Keluar')
+        choice = input('Masukkan nomor opsi: ')
+
+        if choice == '1':
+            name = input('Masukkan nama manajer: ')
+            password = input('Masukkan password manajer: ')
+            managers.add_manager(admin(name, password))
+        elif choice == '2':
+            name = input('Masukkan nama manajer yang akan dihapus: ')
+            for manager in managers.managers:
+                if manager.name == name:
+                    managers.remove_manager(manager)
+                    break
+        elif choice == '3':
+            name = input('Masukkan nama manajer yang akan diedit: ')
+            for manager in managers.managers:
+                if manager.name == name:
+                    new_name = input('Masukkan nama baru: ')
+                    new_password = input('Masukkan password baru: ')
+                    managers.edit_manager(manager, new_name, new_password)
+                    break
+        elif choice == '4':
+            for manager in managers.managers:
+                print(f'Nama: {manager.name} | password: {manager.password}')
+        elif choice == '5':
+            break
+        else:
+            print('Opsi tidak valid')
